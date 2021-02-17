@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import Message from './components/Message';
+// eslint-disable-next-line no-unused-vars
 import interceptor from './api/interceptor';
 import axios from 'axios';
 
 const App = () => {
-  const [availability, setAvailability] = useState([]);
+  const [gloves, setGloves] = useState([])
+  const [facemasks, setFacemasks] = useState([])
+  const [beanies, setBeanies] = useState([])
   const [error, setError] = useState(null)
-  const [newData, setNewData] = useState([]);
   const baseUrl = 'https://enigmatic-taiga-96667.herokuapp.com/https://bad-api-assignment.reaktor.com/v2';
 
   useEffect(() => {
@@ -90,7 +92,7 @@ const App = () => {
         const correctobj = availabilityArray.find( object => object.manufacturer === product.manufacturer)
         for (const value of correctobj.availability) {
           if (value.id === (product.id).toUpperCase()) {
-            payload = value.DATAPAYLOAD;
+            payload = (value.DATAPAYLOAD);
             break;
           }
         }
@@ -120,6 +122,10 @@ const App = () => {
         }
         return ({...product, availability: payload})
       })
+  
+      setGloves(newGlovesAvailability);
+      setBeanies(newBeaniesAvailability);
+      setFacemasks(newFacemasksAvailability);
     }
 
     fetchCategoryData();
@@ -135,7 +141,7 @@ const App = () => {
   return (
     <div className="App">
       <Message message={error} />
-      <NavBar />
+      <NavBar gloves={gloves} facemasks={facemasks} beanies={beanies}/>
     </div>
   );
 };
