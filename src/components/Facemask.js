@@ -1,46 +1,29 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { DataGrid } from "@material-ui/data-grid";
 
 const Facemask = ({facemaskData}) => {
+  const columns = [
+    { field: 'name', headerName: 'Product Name', width: 300 },
+    { field: 'color', headerName: 'Color', width: 180 },
+    { field: 'price', headerName: 'Price', width: 150 },
+    { field: 'manufacturer', headerName: 'Manufacturer', width: 200 },
+    { field: 'availability', headerName: 'Availbaility', width: 200 }
+  ];
+
+  const rows = facemaskData.map((row)=>{
+    let editedString = row.availability.slice(50,-31)
+    return {...row, availability: editedString}
+  })
 
     return (
       <div>
-      {facemaskData.length > 0
-        ? 
-        <TableContainer component={Paper}>
-        <Table className="" size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Product Name</TableCell>
-              <TableCell align="right">Color</TableCell>
-              <TableCell align="right">Price</TableCell>
-              <TableCell align="right">Manufacturer</TableCell>
-              <TableCell align="right">Availability</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {facemaskData.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.color}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
-                <TableCell align="right">{row.manufacturer}</TableCell>
-                <TableCell align="right">{row.availability}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-        : <h1>Loading data, please wait...</h1>
-      }
+      {facemaskData.length > 0 ? (
+        <div style={{ height: 650, width: "70%" }}>
+          <DataGrid rows={rows} columns={columns} pageSize={30} />
+        </div>
+      ) : (
+        <h1>Loading data, please wait...</h1>
+      )}
     </div>
     );
 }

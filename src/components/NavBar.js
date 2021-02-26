@@ -16,7 +16,7 @@ const NavBar = (props) => {
 
     return(
       <div>
-        <AppBar position="static">
+        <AppBar position="sticky">
             <Tabs value={value} onChange={handleChange} variant="fullWidth" centered>
                 <Tab label="Gloves" />
                 <Tab label="Facemasks" />
