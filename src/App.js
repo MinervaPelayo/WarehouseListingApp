@@ -8,8 +8,7 @@ const App = () => {
   const [facemasks, setFacemasks] = useState([]);
   const [beanies, setBeanies] = useState([]);
   const [error, setError] = useState(null);
-  const baseUrl =
-    'https://enigmatic-taiga-96667.herokuapp.com/https://bad-api-assignment.reaktor.com/v2';
+  const baseUrl = 'https://bad-api-assignment.reaktor.com/v2';
 
   useEffect(() => {
     const requestOne = axios.get(`${baseUrl}/products/gloves`);
