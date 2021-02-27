@@ -10,16 +10,11 @@ const Beanie = ({ beanieData }) => {
     { field: 'availability', headerName: 'Availbaility', width: 200 },
   ];
 
-  const rows = beanieData.map((row) => {
-    let editedString = row.availability.slice(50, -31);
-    return { ...row, availability: editedString };
-  });
-
   return (
     <div>
       {beanieData.length > 0 ? (
         <div style={{ height: 650, width: '70%' }}>
-          <DataGrid rows={rows} columns={columns} pageSize={30} />
+          <DataGrid rows={beanieData} columns={columns} pageSize={30} />
         </div>
       ) : (
         <h1>Loading data, please wait...</h1>

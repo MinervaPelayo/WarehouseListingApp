@@ -93,7 +93,7 @@ const App = () => {
         );
         for (const value of correctobj.availability) {
           if (value.id === product.id.toUpperCase()) {
-            payload = value.DATAPAYLOAD;
+            payload = value.DATAPAYLOAD.slice(50, -31);
             break;
           }
         }
@@ -107,7 +107,7 @@ const App = () => {
         );
         for (const value of correctobj.availability) {
           if (value.id === product.id.toUpperCase()) {
-            payload = value.DATAPAYLOAD;
+            payload = value.DATAPAYLOAD.slice(50, -31);
             break;
           }
         }
@@ -121,7 +121,7 @@ const App = () => {
         );
         for (const value of correctobj.availability) {
           if (value.id === product.id.toUpperCase()) {
-            payload = value.DATAPAYLOAD;
+            payload = value.DATAPAYLOAD.slice(50, -31);
             break;
           }
         }
@@ -133,6 +133,8 @@ const App = () => {
     };
 
     fetchCategoryData();
+    const id = setInterval(fetchCategoryData, 300000);
+    return () => clearInterval(id);  
   }, []);
 
   const findManufacturerBrand = (categoryData) => {
